@@ -2,6 +2,7 @@ import React from "react";
 
 type SelectProps = {
   value: string;
+  onChange: any;
 };
 
 const Select = ({ value, onChange }: SelectProps) => {

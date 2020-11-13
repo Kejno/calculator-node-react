@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Input from "./Input.js";
-import Select from "./Select.js";
+import Select from "./Select";
 
 const App = () => {
-  const [value1, setValue1] = useState(0);
-  const [value2, setValue2] = useState(0);
+  const [value1, setValue1] = useState("");
+  const [value2, setValue2] = useState("");
   const [operand, setOperand] = useState("sum");
 
   const onSubmitHandler = async (event: React.SyntheticEvent) => {
@@ -26,16 +26,18 @@ const App = () => {
         <Input
           value={value1}
           label="Value 1"
-          onChange={(event: React.KeyboardEvent<HTMLInputElement>) =>
-            setValue1(event.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const { value } = e.target;
+            setValue1(value);
+          }}
         />
         <Input
           value={value2}
           label="Value 2"
-          onChange={(event: React.KeyboardEvent<HTMLInputElement>) =>
-            setValue2(event.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const { value } = e.target;
+            setValue2(value);
+          }}
         />
         <div
           style={{
@@ -46,7 +48,7 @@ const App = () => {
         >
           <Select
             value={operand}
-            onChange={(event: React.SyntheticEvent) =>
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
               setOperand(event.target.value)
             }
           />

@@ -1,59 +1,59 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Input from "./Input.js";
-import Select from "./Select";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Input from './Input';
+import Select from './Select';
 
 const App = () => {
-  const [value1, setValue1] = useState("");
-  const [value2, setValue2] = useState("");
-  const [operand, setOperand] = useState("sum");
+  const [num1, setNum1] = useState('');
+  const [num2, setNum2] = useState('');
+  const [operand, setOperand] = useState('sum');
+  const [answer, setAnswer] = useState('');
 
-  const onSubmitHandler = async (event: React.SyntheticEvent) => {
+  const onSubmitHandler = async (event: React.SyntheticEvent): Promise<any> => {
     try {
       event.preventDefault();
       const { data } = await axios.get(
-        `/api?operand=${operand}&v1=${value1}&v2=${value2}`
+        `/api?operand=${operand}&num1=${num1}&num2=${num2}`
       );
-      console.log(data);
+      setAnswer(data);
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
-    <div style={{ display: "flex", padding: "200px" }}>
-      <form style={{ margin: "auto" }} onSubmit={onSubmitHandler}>
+    <div style={{ display: 'flex', padding: '200px' }}>
+      <form style={{ margin: 'auto' }} onSubmit={onSubmitHandler}>
         <Input
-          value={value1}
-          label="Value 1"
+          value={num1}
+          label="Number 1"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const { value } = e.target;
-            setValue1(value);
+            setNum1(e.target.value);
           }}
         />
         <Input
-          value={value2}
-          label="Value 2"
+          value={num2}
+          label="Number 2"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const { value } = e.target;
-            setValue2(value);
+            setNum2(e.target.value);
           }}
         />
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            margin: "10px 0",
+            display: 'flex',
+            justifyContent: 'space-between',
+            margin: '10px 0',
           }}
         >
           <Select
             value={operand}
-            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-              setOperand(event.target.value)
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setOperand(e.target.value)
             }
           />
           <button type="submit">Submit</button>
         </div>
+        <div>Ответ: {answer}</div>
       </form>
     </div>
   );

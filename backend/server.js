@@ -1,5 +1,5 @@
 import express from "express";
-import { calc } from "./func_calc.js";
+import { calc } from "./calculate.js";
 
 const app = express();
 

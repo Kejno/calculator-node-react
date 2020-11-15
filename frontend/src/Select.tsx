@@ -1,11 +1,11 @@
 import React from "react";
 
-type SelectProps = {
+interface SelectProps {
   value: string;
-  onChange: any;
-};
+  onChange(e: React.SyntheticEvent): void;
+}
 
-const Select = ({ value, onChange }: SelectProps) => {
+const Select: React.FC<SelectProps> = ({ value, onChange }) => {
   return (
     <select
       style={{ padding: "5px" }}

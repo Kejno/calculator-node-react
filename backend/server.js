@@ -1,16 +1,18 @@
-import express from "express";
-import { calc } from "./calculate.js";
+import express from 'express';
+import { calc } from './calculate.js';
 
 const app = express();
 
-app.use(express.json());
-
-app.get("/api", (req, res) => {
-  res.end(calc(req.query).toString());
+app.get('/api', (req, res) => {
+  try {
+    return res.status(200).end(calc(req.query).toString());
+  } catch (error) {
+    return res.status(500).end('Что-то пошло не так');
+  }
 });
 
-app.get("/", (req, res) => {
-  res.send("API is running....");
+app.get('/', (req, res) => {
+  res.send('API is running....');
 });
 
 const PORT = 5050;

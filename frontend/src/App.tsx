@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Input from './Input';
 import Select from './Select';
 
@@ -9,13 +8,13 @@ const App = () => {
   const [operand, setOperand] = useState('sum');
   const [answer, setAnswer] = useState('');
 
-  const onSubmitHandler = async (event: React.SyntheticEvent): Promise<any> => {
+  const onSubmitHandler = (e: React.SyntheticEvent) => {
     try {
-      event.preventDefault();
-      const { data } = await axios.get(
-        `/api?operand=${operand}&num1=${num1}&num2=${num2}`
-      );
-      setAnswer(data);
+      e.preventDefault();
+
+      fetch(`/api?operand=${operand}&num1=${num1}&num2=${num2}`)
+        .then((res) => res.text() as Promise<string>)
+        .then((data) => setAnswer(data));
     } catch (e) {
       console.log(e);
     }

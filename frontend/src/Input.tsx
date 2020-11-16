@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface InputProps {
   value: string;
@@ -9,13 +9,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({ value, label, onChange }) => (
   <div className="inputWrapper">
     <label htmlFor={value}>{label} </label>
-    <input
-      value={value}
-      type="number"
-      id="input1"
-      onChange={onChange}
-      required
-    />
+    <input value={value} type="text" id="input1" onChange={onChange} required />
   </div>
 );
 

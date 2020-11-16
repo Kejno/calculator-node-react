@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SelectProps {
   value: string;
@@ -8,7 +8,7 @@ interface SelectProps {
 const Select: React.FC<SelectProps> = ({ value, onChange }) => {
   return (
     <select
-      style={{ padding: "5px" }}
+      style={{ padding: '5px' }}
       value={value}
       name="calc"
       onChange={onChange}

@@ -1,10 +1,8 @@
 import { SUM, SUB, MULTI, DIV } from './constants.js';
 
-function isNumeric(num) {
-  return !isNaN(parseFloat(num)) && isFinite(num);
-}
+const isNumeric = (num) => !isNaN(parseFloat(num)) && isFinite(num);
 
-export const calc = ({ operand, num1, num2 }) => {
+export const calc = ({ operand, num1, num2 }, error = 'Invalid values') => {
   const value1 = +num1;
   const value2 = +num2;
 
@@ -18,12 +16,12 @@ export const calc = ({ operand, num1, num2 }) => {
         return value1 * value2;
       case DIV:
         if (value2 === 0) {
-          return 'На 0 делить нельзя!!!';
+          return 'Cannot divide by zero';
         }
-        return (value1 / value2).toFixed(3);
+        return value1 / value2;
       default:
-        return;
+        return error;
     }
   }
-  return 'Invalid inputs';
+  return error;
 };
